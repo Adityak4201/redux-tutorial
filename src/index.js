@@ -1,19 +1,25 @@
+// import { BUG_ADDED, BUG_REMOVED } from "./actionTypes";
+import * as actions from "./actionTypes";
 import store from "./store";
 
+const unsubscribe = store.subscribe(() => {
+  console.log("Store Changed", store.getState());
+});
+
 store.dispatch({
-  type: "bugAdded",
+  type: actions.BUG_ADDED,
   payload: {
     description: "Glitch in FB",
   },
 });
 
-console.log(store.getState());
+unsubscribe();
 
 store.dispatch({
-  type: "bugRemoved",
+  type: actions.BUG_REMOVED,
   payload: {
     id: 1,
   },
 });
 
-console.log(store.getState());
+// console.log(store.getState());
