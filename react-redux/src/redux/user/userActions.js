@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   FETCH_USERS_FAILURE,
   FETCH_USERS_REQUEST,
@@ -17,3 +18,17 @@ export const fetchUsersFailure = (error) => ({
   type: FETCH_USERS_FAILURE,
   payload: { error },
 });
+
+export const fetchUsers = () => (dispatch) => {
+  dispatch(fetchUsersRequest());
+  axios
+    .get("https://jsonplaceholder.typicode.com/users")
+    .then((res) => {
+      const users = res.data;
+      dispatch(fetchUsersSuccess(users));
+    })
+    .catch((err) => {
+      const error = err.msg;
+      dispatch(fetchUsersFailure(error));
+    });
+};
