@@ -4,6 +4,7 @@ import { buyCake } from "../redux";
 
 const CakeContainer = (props) => {
   //   console.log(props);
+
   return (
     <div>
       <h2>Number of Cakes - {props.numberOfCakes}</h2>
